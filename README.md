@@ -6,7 +6,6 @@ Open IP Cameras, with default credentials - publicly accessible, scrapped from [
 ```
 git clone https://github.com/GeorgePatsias/OpenEyes.git
 pip install -r requirements.txt
-
 ```
 
 ## ▶️ Run
