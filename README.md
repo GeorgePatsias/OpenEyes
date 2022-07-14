@@ -14,3 +14,7 @@ Edit the `config.py` with the desired configurations and run.
 ```
 python3 srv.py
 ```
+<br>
+<div align="center">
+<img src=image.png>
+</div>
