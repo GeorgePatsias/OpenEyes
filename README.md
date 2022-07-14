@@ -12,7 +12,7 @@
 </a>
 </div>
 <br>
-Open IP Cameras, with default credentials - publicly accessible, scrapped from [Insecam](http://www.insecam.org/). Every camera is placed on a Google Map with live stream and information.
+Open IP Cameras, with default credentials - publicly accessible, scrapped from http://www.insecam.org/. Every camera is placed on a Google Map with live stream and information.
 
 ## 🏗️ Installation
 ```
