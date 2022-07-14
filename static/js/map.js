@@ -134,6 +134,10 @@ function initMap() {
                         <td>${country}</td>
                     </tr>
                     <tr>
+                    <td>Coordinates</td>
+                        <td>${lat}, ${lng}</td>
+                    </tr>
+                    <tr>
                         <td>Country code</td>
                         <td>${country_code}</td>
                     </tr>
