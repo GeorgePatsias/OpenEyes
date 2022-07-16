@@ -1,2 +1,2 @@
 flask==2.1.2
-flask-compress=1.12
+flask-compress==1.12
