@@ -20,11 +20,18 @@ git clone https://github.com/GeorgePatsias/OpenEyes.git
 pip install -r requirements.txt
 ```
 
-## ▶️ Run
+## ▶️ 🐍 Run
 Edit the `config.py` with the desired configurations and run.
 ```
 python3 srv.py
 ```
+
+## ▶️ 🐋Docker Run
+Edit the `config.py` with the desired configurations and run.
+```
+docker build -t openeyes . && docker run -p 5001:5001 openeyes
+```
+
 <br>
 <div align="center">
 <img src=image.png>
