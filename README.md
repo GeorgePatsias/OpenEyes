@@ -26,7 +26,7 @@ Edit the `config.py` with the desired configurations and run.
 python3 srv.py
 ```
 
-## ▶️ 🐋Docker Run
+## ▶️ 🐋 Docker Run
 Edit the `config.py` with the desired configurations and run.
 ```
 docker build -t openeyes . && docker run -p 5001:5001 openeyes
