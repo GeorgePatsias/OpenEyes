@@ -34,7 +34,7 @@ docker build -t openeyes . && docker run -p 5001:5001 openeyes
 
 <br>
 <div align="center">
-<img src=image.png>
+<img src=img.png>
 </div>
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/UserX)
