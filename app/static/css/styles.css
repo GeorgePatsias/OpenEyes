@@ -37,14 +37,25 @@ body {
     width: 100%;
     height: 100%;
     z-index: 9999;
-    background: url('/static/img/spinner.gif') 50% 50% no-repeat rgb(0, 0, 0);
+    background: url('/static/img/loading.gif') 50% 50% no-repeat rgb(0, 0, 0);
+    opacity: 0.8;
+}
+
+#download-loader {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: url('/static/img/download-cameras.gif') 50% 50% no-repeat rgb(0, 0, 0);
     opacity: 0.8;
 }
 
 table,
 td,
 th {
-    border: 1px solid;
+    border-bottom: 1px solid #eee;
     padding: 5px;
     text-align: left;
     white-space: nowrap;
@@ -52,11 +63,68 @@ th {
     text-overflow: ellipsis;
 }
 
+tr:nth-child(even) {
+    background-color: #eee;
+}
+
+tr:nth-child(odd) {
+    background-color: #fff;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
 }
 
+.title {
+    font-weight: bold;
+}
+
+.info {
+    border-left: 1px solid grey;
+}
+
 #map>div:nth-child(2) {
     display: none;
+}
+
+.btnUpdate {
+    width: 115px;
+    height: 39px;
+    background-color: #fff;
+    box-shadow: 0 1px 2px rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
+    color: rgb(102 102 102);
+    display: block;
+    border-radius: 32px;
+    text-align: center;
+    cursor: pointer;
+    margin: 10px;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 2.4rem;
+    font-family: Google Sans, Roboto, Arial, sans-serif;
+}
+
+
+.divLocation {
+    width: 40px;
+    height: 40px;
+    border-bottom: 2px;
+    background-color: #fff;
+    border: none;
+    outline: none;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.divLocationInner {
+    width: 18px;
+    height: 18px;
+    margin: 5px;
+    background-image: url('/static/img/location.png');
+    background-size: 180px 18px;
+    background-position: 0 0;
+    background-repeat: no-repeat;
 }

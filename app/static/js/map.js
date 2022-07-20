@@ -1,3 +1,7 @@
+$( document ).ready(function() {
+    $("#download-loader").hide();
+});
+
 // Normalize overlapping markers
 function correctPosition(lat, lng) {
     const min = 1;
@@ -15,26 +19,12 @@ function addLocationButton(map) {
     var controlDiv = document.createElement('div');
 
     var firstChild = document.createElement('button');
-    firstChild.style.backgroundColor = '#fff';
-    firstChild.style.border = 'none';
-    firstChild.style.outline = 'none';
-    firstChild.style.width = '40px';
-    firstChild.style.height = '40px';
-    firstChild.style.borderRadius = '2px';
-    firstChild.style.boxShadow = '0 1px 4px rgba(0,0,0,0.3)';
-    firstChild.style.cursor = 'pointer';
-    firstChild.style.marginRight = '10px';
+    firstChild.classList.add("divLocation");
     firstChild.title = 'Your Location';
     controlDiv.appendChild(firstChild);
 
     var secondChild = document.createElement('div');
-    secondChild.style.margin = '5px';
-    secondChild.style.width = '18px';
-    secondChild.style.height = '18px';
-    secondChild.style.backgroundImage = 'url(/static/img/location.png)';
-    secondChild.style.backgroundSize = '180px 18px';
-    secondChild.style.backgroundPosition = '0 0';
-    secondChild.style.backgroundRepeat = 'no-repeat';
+    secondChild.classList.add("divLocationInner");
     firstChild.appendChild(secondChild);
 
     google.maps.event.addListener(map, 'center_changed', function () {
@@ -91,7 +81,7 @@ function initMap() {
 
             let city = locations[i]['city'];
             let stream = locations[i]['stream'];
-            let id = locations[i]['id'];
+            // let id = locations[i]['id'];
             let country = locations[i]['country'];
             let country_code = locations[i]['country_code'];
             let region = locations[i]['region'];
@@ -123,49 +113,49 @@ function initMap() {
                     let content = `
                     <a target="_blank" href="${stream}"><img src="${stream}" height='100%' width='100%'/></a>
                     <br/>
-                    <div style="overflow-x:auto;">
+                    <div>
                     <table>
                     <tr>
-                        <td>Stream</td>
-                        <td><a target="_blank" href="${stream}">${stream}</a></td>
+                        <td class="title">Stream</td>
+                        <td class="info"><a target="_blank" href="${stream}">${stream}</a></td>
                     </tr>
                     <tr>
-                        <td>Country</td>
-                        <td>${country}</td>
+                        <td class="title">Country</td>
+                        <td class="info">${country}</td>
                     </tr>
                     <tr>
-                    <td>Coordinates</td>
-                        <td>${lat}, ${lng}</td>
+                        <td class="title">Coordinates</td>
+                        <td class="info"><a target="_blank" href="https://www.google.com/maps/place/${lat},${lng}">${lat}, ${lng}</a></td>
                     </tr>
                     <tr>
-                        <td>Country code</td>
-                        <td>${country_code}</td>
+                        <td class="title">Country code</td>
+                        <td class="info">${country_code}</td>
                     </tr>
                     <tr>
-                        <td>Region</td>
-                        <td>${region}</td>
+                        <td class="title">Region</td>
+                        <td class="info"class="info">${region}</td>
                     </tr>
                     <tr>
-                        <td>City</td>
-                        <td>${city}</td>
+                        <td class="title">City</td>
+                        <td class="info">${city}</td>
                     </tr>
                     <tr>
-                        <td>ZIP</td>
-                        <td>${zip}</td>
+                        <td class="title">ZIP</td>
+                        <td class="info">${zip}</td>
                     </tr>
                     <tr>
-                        <td>Timezone</td>
-                        <td>${timezone}</td>
+                        <td class="title">Timezone</td>
+                        <td class="info">${timezone}</td>
                     </tr>
                     <tr>
-                        <td>Manufacturer</td>
-                        <td>${manufacturer}</td>
+                        <td class="title">Manufacturer</td>
+                        <td class="info">${manufacturer}</td>
                     </tr>
                     </table>
                     </div>
-                    `
-                    infowindow.setContent(content);
+                    `;
 
+                    infowindow.setContent(content);
 
                     infowindow.open(map, marker);
                 }
@@ -188,27 +178,15 @@ function initMap() {
 
 function addButton(map) {
     let controlDiv = document.createElement('div');
+    controlDiv.classList.add("btnUpdate");
 
-    let firstChild = document.createElement('button');
-    firstChild.style.backgroundColor = '#fff';
-    firstChild.style.boxShadow = 'rgb(0 0 0 / 30%) 0px 1px 4px -1px;';
-    firstChild.style.color = 'rgb(102 102 102)';
-    firstChild.style.border = 'none';
-    firstChild.style.outline = 'none';
-    firstChild.style.width = '115px';
-    firstChild.style.height = '39px';
-    firstChild.style.borderRadius = '2px';
-    firstChild.style.boxShadow = '0 1px 4px rgba(0,0,0,0.3)';
-    firstChild.style.cursor = 'pointer';
-    firstChild.style.margin = '10px';
-    firstChild.classList.add("fa");
-    firstChild.innerHTML = 'Update \&#xf03d';
-    firstChild.title = 'Fetch new Cameras';
+    let firstChild = document.createElement('a');
+    firstChild.innerHTML = 'Update <i class="fa-solid fa-video"></i>';
     controlDiv.appendChild(firstChild);
 
     firstChild.addEventListener('click', function () {
         $("#map").hide();
-        $("#loader").show();
+        $("#download-loader").show();
         window.location.replace("/scrape_cams");
     });
 
