@@ -1,4 +1,6 @@
-$( document ).ready(function() {
+$(document).ready(function () {
+    window.initMap = initMap;
+
     $("#download-loader").hide();
 });
 
@@ -72,24 +74,21 @@ function initMap() {
     var markers = []
     $.getJSON("/get_cams", function (locations) {
         for (let i = 0; i < locations.length; i++) {
-            let lat = locations[i]['lat'];
-            let lng = locations[i]['lng'];
+            const data = locations[i];
 
-            if (!lat || !lng) {
-                continue;
-            }
+            const lat = data['lat'];
+            const lng = data['lng'];
+            const city = data['city'];
+            const stream = data['stream'];
+            // let id = data['id'];
+            const country = data['country'];
+            const country_code = data['country_code'];
+            const region = data['region'];
+            const zip = data['zip'];
+            const timezone = data['timezone'];
+            const manufacturer = data['manufacturer'];            
 
-            let city = locations[i]['city'];
-            let stream = locations[i]['stream'];
-            // let id = locations[i]['id'];
-            let country = locations[i]['country'];
-            let country_code = locations[i]['country_code'];
-            let region = locations[i]['region'];
-            let zip = locations[i]['zip'];
-            let timezone = locations[i]['timezone'];
-            let manufacturer = locations[i]['manufacturer'];
-
-            var latLng = new google.maps.LatLng(lat, lng);
+            let latLng = new google.maps.LatLng(lat, lng);
 
             // Correct position if marker has exact position with another one.
             if (markers.length != 0) {
@@ -110,49 +109,50 @@ function initMap() {
             // Marker click listener
             google.maps.event.addListener(marker, "click", (function (marker) {
                 return function () {
-                    let content = `
-                    <a target="_blank" href="${stream}"><img src="${stream}" height='100%' width='100%'/></a>
-                    <br/>
-                    <div>
+                    const content = `
                     <table>
-                    <tr>
-                        <td class="title">Stream</td>
-                        <td class="info"><a target="_blank" href="${stream}">${stream}</a></td>
-                    </tr>
-                    <tr>
-                        <td class="title">Country</td>
-                        <td class="info">${country}</td>
-                    </tr>
-                    <tr>
-                        <td class="title">Coordinates</td>
-                        <td class="info"><a target="_blank" href="https://www.google.com/maps/place/${lat},${lng}">${lat}, ${lng}</a></td>
-                    </tr>
-                    <tr>
-                        <td class="title">Country code</td>
-                        <td class="info">${country_code}</td>
-                    </tr>
-                    <tr>
-                        <td class="title">Region</td>
-                        <td class="info"class="info">${region}</td>
-                    </tr>
-                    <tr>
-                        <td class="title">City</td>
-                        <td class="info">${city}</td>
-                    </tr>
-                    <tr>
-                        <td class="title">ZIP</td>
-                        <td class="info">${zip}</td>
-                    </tr>
-                    <tr>
-                        <td class="title">Timezone</td>
-                        <td class="info">${timezone}</td>
-                    </tr>
-                    <tr>
-                        <td class="title">Manufacturer</td>
-                        <td class="info">${manufacturer}</td>
-                    </tr>
+                        <tr>
+                            <a target="_blank" href="${stream}">
+                                <img src="${stream}" height='100%' width='100%'/>
+                            </a>
+                        </tr>
+                        <tr>
+                            <td class="title">Stream</td>
+                            <td class="info"><a target="_blank" href="${stream}">${stream}</a></td>
+                        </tr>
+                        <tr>
+                            <td class="title">Country</td>
+                            <td class="info">${country}</td>
+                        </tr>
+                        <tr>
+                            <td class="title">Coordinates</td>
+                            <td class="info"><a target="_blank" href="https://www.google.com/maps/place/${lat},${lng}">${lat}, ${lng}</a></td>
+                        </tr>
+                        <tr>
+                            <td class="title">Country code</td>
+                            <td class="info">${country_code}</td>
+                        </tr>
+                        <tr>
+                            <td class="title">Region</td>
+                            <td class="info"class="info">${region}</td>
+                        </tr>
+                        <tr>
+                            <td class="title">City</td>
+                            <td class="info">${city}</td>
+                        </tr>
+                        <tr>
+                            <td class="title">ZIP</td>
+                            <td class="info">${zip}</td>
+                        </tr>
+                        <tr>
+                            <td class="title">Timezone</td>
+                            <td class="info">${timezone}</td>
+                        </tr>
+                        <tr>
+                            <td class="title">Manufacturer</td>
+                            <td class="info"><a target="_blank" href="https://www.google.com/search?q=${manufacturer}">${manufacturer}</a></td>
+                        </tr>
                     </table>
-                    </div>
                     `;
 
                     infowindow.setContent(content);
@@ -168,7 +168,7 @@ function initMap() {
     });
     addLocationButton(map);
 
-    addButton(map);
+    addButtonUpdate(map);
 
     google.maps.event.addListener(map, 'click', function () {
         infowindow.close();
@@ -176,7 +176,7 @@ function initMap() {
 }// InitMap
 
 
-function addButton(map) {
+function addButtonUpdate(map) {
     let controlDiv = document.createElement('div');
     controlDiv.classList.add("btnUpdate");
 
